@@ -1,0 +1,20 @@
+{
+  "template": "https://github.com/slangenbach/cookiecutter-python-uv",
+  "commit": "cab06d12d58ea3132de493f72eb414c533e49b30",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "project_name": "Poor Man's UI",
+      "project_description": "A poor man's chatbot UI",
+      "project_slug": "poor-mans-ui",
+      "package_name": "poor_mans_ui",
+      "author": "Stefan Langenbach",
+      "email": "stefan@langenbach.online",
+      "deploy_to_gh": false,
+      "deploy_to_pypi": false,
+      "_template": "https://github.com/slangenbach/cookiecutter-python-uv",
+      "_commit": "cab06d12d58ea3132de493f72eb414c533e49b30"
+    }
+  },
+  "directory": null
+}
