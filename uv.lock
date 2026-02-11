@@ -1198,7 +1198,7 @@ wheels = [
 
 [[package]]
 name = "python-fasthtml"
-version = "0.12.39"
+version = "0.12.41"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "beautifulsoup4" },
@@ -1212,9 +1212,9 @@ dependencies = [
     { name = "starlette" },
     { name = "uvicorn", extra = ["standard"] },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/b3/60/6b3b7ec0ab8054928b74cfa7ee49d90c3cde576268e054ba9f17989b7c1e/python_fasthtml-0.12.39.tar.gz", hash = "sha256:ae324b34a1586698b052cad8e9ff9255bd6cb486b01b946e95b9b63f220a5532", size = 70842, upload-time = "2026-01-09T23:54:14.017Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/90/d3/2e92da6114588fb52e6b16de2d101e6b09b18ef5ef7f9ce8eae458f022f8/python_fasthtml-0.12.41.tar.gz", hash = "sha256:26f1d573b4c738bc4133e3f83b3172503bb97b5a92b3a732512fcc0824cbb554", size = 71746, upload-time = "2026-02-07T00:39:49.096Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f7/1b/354a0ab669703f87e9ab0464670be8791a9de59c2693ffb0d9a584927b5e/python_fasthtml-0.12.39-py3-none-any.whl", hash = "sha256:d9d2a173714852f906d1821f5eeb40640db2ef2b2f997edee63471feb58127be", size = 73179, upload-time = "2026-01-09T23:54:12.07Z" },
+    { url = "https://files.pythonhosted.org/packages/22/da/e890190fd9b3bd465c796a341fb24cbb1b0f9d831f511d21db9faf056e32/python_fasthtml-0.12.41-py3-none-any.whl", hash = "sha256:fc0a1b7735bfd591076b5dd7b6af8050e76ba1604fa5ad9d250aec6f5a69af93", size = 75431, upload-time = "2026-02-07T00:39:47.25Z" },
 ]
 
 [[package]]
