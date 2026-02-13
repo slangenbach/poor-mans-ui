@@ -4,6 +4,12 @@
 
 A poor man's chatbot UI
 
+![Logo](assets/logo.png)
+
+## About
+
+tbd
+
 ## Prerequisites
 
 - [uv][1]
@@ -32,7 +38,7 @@ tbd
 
 ## Contributing
 
-Check out [Contributing](Contributing.md) for further information.
+Check out [CONTRIBUTING.md](Contributing.md) for further information.
 
 
 [1]: https://docs.astral.sh/uv/

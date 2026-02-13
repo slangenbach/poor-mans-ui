@@ -1,6 +1,6 @@
 {
   "template": "https://github.com/slangenbach/cookiecutter-python-uv",
-  "commit": "cab06d12d58ea3132de493f72eb414c533e49b30",
+  "commit": "d8934f08b73f98c8a0d09a0c97fedda2be7e37e0",
   "checkout": null,
   "context": {
     "cookiecutter": {
@@ -13,7 +13,7 @@
       "deploy_to_gh": false,
       "deploy_to_pypi": false,
       "_template": "https://github.com/slangenbach/cookiecutter-python-uv",
-      "_commit": "cab06d12d58ea3132de493f72eb414c533e49b30"
+      "_commit": "d8934f08b73f98c8a0d09a0c97fedda2be7e37e0"
     }
   },
   "directory": null
