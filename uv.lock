@@ -425,6 +425,19 @@ wheels = [
 ]
 
 [[package]]
+name = "fhdaisy"
+version = "0.0.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "fastcore" },
+    { name = "python-fasthtml" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/c5/be/41c9b0c1c68a230713125ac8f7875684a2c19de5f015003245031451240a/fhdaisy-0.0.1.tar.gz", hash = "sha256:cd5dc4567a1f4125a784264a4d26c86131d4ce134a25544c0f58c8331e1221c4", size = 12126, upload-time = "2025-11-19T23:13:01.721Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ac/c8/5d0c411c9abd9fff122f787acf5f59cb29a6cb326686e4476f8e4295610a/fhdaisy-0.0.1-py3-none-any.whl", hash = "sha256:a971bc7029d92ee26d833518d9531aa806f3abb57b78cd65310fdb63bdd4b2ae", size = 11329, upload-time = "2025-11-19T23:13:00.826Z" },
+]
+
+[[package]]
 name = "filelock"
 version = "3.20.3"
 source = { registry = "https://pypi.org/simple" }
@@ -909,6 +922,7 @@ name = "poor-mans-ui"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "fhdaisy" },
     { name = "pydantic-settings" },
     { name = "python-fasthtml" },
 ]
@@ -926,6 +940,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "fhdaisy", specifier = ">=0.0.1" },
     { name = "pydantic-settings", specifier = ">=2.9.1" },
     { name = "python-fasthtml", specifier = ">=0.12.39" },
 ]
