@@ -30,7 +30,9 @@ Edit the **.env** file in project root directory and set the following variables
 
 ## Usage
 
-tbd
+Run the UI
+
+    task run
 
 ## Troubleshooting
 

@@ -1,44 +1,94 @@
 """UI."""
 
-from fasthtml.common import *
-from fhdaisy import *
-from fhdaisy.xtras import ChatTurn
+from datetime import datetime
 
-app, rt = fast_app(pico=False, hdrs=daisy_hdrs, htmlkw={"data-theme": "light"})
+from fasthtml.common import A, Div, Form, Li, Title, Ul, fast_app, serve
+from fhdaisy import (
+    Btn,
+    Chat,
+    ChatBubble,
+    ChatFooter,
+    ChatHeader,
+    Drawer,
+    DrawerContent,
+    DrawerOverlay,
+    DrawerSide,
+    DrawerToggle,
+    Footer,
+    Input,
+    Label,
+    Loading,
+    Navbar,
+    NavbarEnd,
+    NavbarStart,
+    daisy_hdrs,
+)
+from poor_mans_agent import Agent
+
+from poor_mans_ui.config import get_config
+from poor_mans_ui.constants import (
+    APP_FOOTER_LINK,
+    APP_FOOTER_TITLE,
+    APP_INPUT_BOX_PLACEHOLDER,
+    APP_TITLE,
+)
+from poor_mans_ui.database import ChatSchema
+from poor_mans_ui.logger import get_logger
+
+config = get_config()
+logger = get_logger(__name__, level=config.log_level)
+agent = Agent()
+
+app, rt = fast_app(
+    pico=False,
+    hdrs=daisy_hdrs,
+    htmlkw={"data-theme": config.theme},
+)
 
 
-def navbar() -> Navbar:
+def _make_chat(msg: str, role: str) -> Chat:
+    now = datetime.now().isoformat(timespec="seconds")  # noqa: DTZ005
+    # messages.insert(Message(chat_id=1, role=role, content=msg, timestamp=now))
+
+    return Chat(
+        ChatHeader(role.upper()),
+        ChatBubble(msg, cls="-primary" if role == "user" else "-secondary"),
+        ChatFooter(now),
+        cls="-start" if role == "user" else "-end",
+    )
+
+
+def navbar() -> Navbar:  # noqa: D103
     return Navbar(
-        NavbarStart(Btn("Poor Man's UI", cls="btn-ghost text-xl font-bold")),
+        NavbarStart(Btn(APP_TITLE, cls="btn-ghost text-xl font-bold")),
         NavbarEnd(Label("☰", fr="drawer", cls="btn btn-ghost")),
         cls="bg-base-200 shadow-sm",
     )
 
 
-def sidebar() -> DrawerSide:
+def sidebar() -> DrawerSide:  # noqa: D103
     return DrawerSide(
         DrawerOverlay(fr="drawer"),
-        Ul(Li(A("Chat 1")), Li(A("Chat 2")), cls="menu bg-base-200 min-h-full w-80 p-4"),
+        Ul(
+            [Li(A(c.title, href=f"/chat/{c.id}")) for c in [ChatSchema(title="Hello, world")]],
+            cls="menu bg-base-200 min-h-full w-80 p-4",
+        ),
     )
 
 
-def chat_area() -> Div:
+def chat_area() -> Div:  # noqa: D103 # ty: ignore[invalid-type-form]
     return Div(
-        ChatTurn("Hello", cls="-start", bubblecls="-primary"),
-        ChatTurn("World!", cls="-end", bubblecls="-secondary"),
-        ChatTurn("What's", cls="-start", bubblecls="-primary"),
-        ChatTurn("up?", cls="-end", bubblecls="-secondary"),
         id="chatturns",
         cls="flex flex-1 flex-col gap-4 p-4 overflow-y-auto",
     )
 
 
-def input_bar() -> Form:
+def input_bar() -> Form:  # noqa: D103 # ty: ignore[invalid-type-form]
     return Form(
-        Join(
+        Div(
             Input(
-                name="message",
-                placeholder="Any poor thoughts on your mind?",
+                name="msg",
+                placeholder=APP_INPUT_BOX_PLACEHOLDER,
                 cls="w-full",
             ),
             Btn("Send", cls="-primary"),
@@ -49,7 +99,7 @@ def input_bar() -> Form:
                 hx_swap="innerHTML",
                 hx_post="/clear",
             ),
-            cls="w-full p-8",
+            cls="flex gap-2 p-4 w-full p-8",
         ),
         hx_post="/send",
         hx_target="#chatturns",
@@ -58,28 +108,59 @@ def input_bar() -> Form:
     )
 
 
-def footer() -> Footer:
-    return Footer("An UI to chat with Poor Man's agent", cls="bg-base-300 p-2 footer-center")
+def footer() -> Footer:  # noqa: D103 # ty: ignore[invalid-type-form]
+    return Footer(
+        A(
+            APP_FOOTER_TITLE,
+            href=APP_FOOTER_LINK,
+        ),
+        cls="bg-base-300 p-2 footer-center",
+    )
 
 
 @rt("/send")
-def chat(message: str):
-    if message:
-        return ChatTurn(message, cls="-start", bubblecls="-primary"), ChatTurn(
-            f"Mirror: {message}", cls="-end", bubblecls="-secondary"
+def send_message(msg: str):
+    """Send chat message."""
+    if msg:
+        return (
+            _make_chat(msg, role="user"),
+            Chat(
+                ChatHeader("AI"),
+                ChatBubble(Loading(cls="-dots"), cls="-secondary"),
+                cls="-end",
+                hx_get=f"/agent?msg={msg}",
+                hx_trigger="load",
+                hx_swap="outerHTML",
+                hx_request={"timeout": config.timeout},
+            ),
         )
 
 
+@rt("/agent")
+def call_agent(msg: str):
+    """Call Poor Man's Agent."""
+    logger.debug("Calling agent")
+    try:
+        response = agent.run(msg)
+    except Exception as err:  # noqa: BLE001
+        logger.error("Could not run agent: %s", err)
+        response = "The agent hit a wall, please try again."
+
+    return _make_chat(msg=response, role="ai")  # ty: ignore[invalid-argument-type]
+
+
 @rt("/clear")
-def clear():
+def clear_messages():
+    """Clear chat message area."""
     return ""
 
 
 @rt("/")
 def get():
+    """Load UI."""
     return (
         (
-            Title("Poor Man's UI"),
+            Title(APP_TITLE),
             Drawer(
                 DrawerToggle(id="drawer"),
                 DrawerContent(
