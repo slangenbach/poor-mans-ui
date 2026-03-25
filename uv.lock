@@ -493,11 +493,11 @@ wheels = [
 
 [[package]]
 name = "fastcore"
-version = "1.12.21"
+version = "1.12.31"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/77/0b/6042317832d2c3b18f83bd04e6a2506be4f313f8a9638a821a2d11f1d626/fastcore-1.12.21.tar.gz", hash = "sha256:3e9445cdab5203d5e60a5bf8b7e70bd0ed977c2f17df3ecb09cea8086fcc0f11", size = 93035, upload-time = "2026-03-01T15:27:58.612Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/1b/72/acab01c6b68c7f94080f79049b3d67bbec3af98b65ef101775e08cd11f41/fastcore-1.12.31.tar.gz", hash = "sha256:684a7b05b9f49d94d9ebbf7e104bbe54fa001aa8c78fa681cc7aabbd12d1bbde", size = 94319, upload-time = "2026-03-22T02:21:21.211Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f2/b2/fb3f5f15cd5eeb951d28da38a1b750a74e5478db808ba7f5dc717cf881b0/fastcore-1.12.21-py3-none-any.whl", hash = "sha256:3321ba68ce8517ebcb7cd514fbb60dc75c30a67166f242e4b54e6c8055ad0e08", size = 97221, upload-time = "2026-03-01T15:27:57.053Z" },
+    { url = "https://files.pythonhosted.org/packages/1e/5c/9516828037b1680de14bae4d93b2868b26417059e1e5cb7d8ad7be649197/fastcore-1.12.31-py3-none-any.whl", hash = "sha256:2634f117fe3a2f6c250f8500f70211c96158399936e90fa6d1010d2d516bf03a", size = 98509, upload-time = "2026-03-22T02:21:19.274Z" },
 ]
 
 [[package]]
@@ -1162,7 +1162,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "fastcore", specifier = "==1.12.21" },
+    { name = "fastcore", specifier = "==1.12.31" },
     { name = "fhdaisy", specifier = ">=0.0.1" },
     { name = "poor-mans-agent", git = "https://github.com/slangenbach/poor-mans-agent.git" },
     { name = "pydantic-settings", specifier = ">=2.9.1" },
